@@ -3,12 +3,12 @@ export const dbs = {
     collection: 'authentication',
     db: 'auth'
   },
+  jar: {
+    collection: 'coins',
+    db: 'coinsDb'
+  },
   user: {
     collection: 'users',
     db: 'user'
-  },
-  jar: {
-    collection: 'coins',
-    db: 'coins'
   }
 };
