@@ -21,34 +21,6 @@ const url = MONGO_DB_CONN || `mongodb://${MONGO_DB_ADDRESS}:${MONGO_DB_PORT}/${M
 // tslint:disable:max-line-length
 module.exports = {
   /**
-   * Issuer Authentication configuration
-   */
-  authentication: {
-    issuer: 'issuer.Daniels-MacBook-Pro-2.local',
-    jwt: {
-      audiences: {
-        'audience1.Daniels-MacBook-Pro-2.local': `FA.^o2!wZA%;uZGh#^D7v#:-[X#$7^A#`
-      },
-      exp: '48h',
-      fields: {
-        _id: 'id',
-        fn: 'firstName',
-        ln: 'lastName'
-      },
-      issuer: 'issuer.Daniels-MacBook-Pro-2.local',
-      key: `U4QebuRg;|vuS];Id{#)*|I#YNV32ooJ`
-    },
-    native: {
-      bcryptHashRounds: 12,
-      create: {
-        acceptFields: {
-          firstName: 'fn',
-          lastName: 'ln'
-        }
-      }
-    }
-  },
-  /**
    * see: https://github.com/expressjs/cors
    */
   cors: {
@@ -64,16 +36,6 @@ module.exports = {
    * Database configurations for SakuraAPI
    */
   dbConnections: [
-    {
-      mongoClientOptions: {},
-      name: dbs.authentication.db,
-      url
-    },
-    {
-      mongoClientOptions: {},
-      name: dbs.user.db,
-      url
-    }
   ],
   /**
    * Logging configuration for SakuraAPI

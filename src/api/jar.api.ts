@@ -13,51 +13,15 @@ export class JarApi extends SakuraApiRoutable {
   }
 
   @Route({
-    method: 'delete',
-    path: ''
-  })
-  async deleteHandler(req: Request, res: Response, next: NextFunction) {
-    await this.configHandler(req, res);
-    next();
-  }
-
-  @Route({
     method: 'get',
     path: ''
   })
   async getHandler(req: Request, res: Response, next: NextFunction) {
-    await this.configHandler(req, res);
+    await this.defaultHandler(req, res);
     next();
   }
 
-  @Route({
-    method: 'head',
-    path: ''
-  })
-  async headHandler(req: Request, res: Response, next: NextFunction) {
-    await this.configHandler(req, res);
-    next();
-  }
-
-  @Route({
-    method: 'post',
-    path: ''
-  })
-  async postHandler(req: Request, res: Response, next: NextFunction) {
-    await this.configHandler(req, res);
-    next();
-  }
-
-  @Route({
-    method: 'put',
-    path: ''
-  })
-  async putHandler(req: Request, res: Response, next: NextFunction) {
-    await this.configHandler(req, res);
-    next();
-  }
-
-  async configHandler(req: Request, res: Response): Promise<void> {
+  async defaultHandler(req: Request, res: Response): Promise<void> {
     const locals = res.locals as IRoutableLocals;
 
     try {

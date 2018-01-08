@@ -63,7 +63,7 @@ export class ConfigApi extends SakuraApiRoutable {
     try {
       locals
         .send(OK, {
-          server: 'coin-jar',
+          server: 'test',
           serverUp: true
         });
     } catch (err) {

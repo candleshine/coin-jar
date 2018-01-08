@@ -1,21 +1,16 @@
 import {SakuraApi} from '@sakuraapi/api';
-import {addAuthAudience, IAuthAudienceOptions} from '@sakuraapi/auth-audience';
-import {addAuthenticationAuthority, IAuthenticationAuthorityOptions} from '@sakuraapi/auth-native-authority';
-import {json} from 'body-parser';
 import * as cors from 'cors';
 import * as debugInit from 'debug';
 import * as helmet from 'helmet';
-import {ConfigApi} from './api/config.api';
-import {authExcludedRoutes} from './config/bootstrap/auth-excluded-routes';
 import {BootstrapIndexes} from './config/bootstrap/bootstrap-indexes';
-import {dbs} from './config/bootstrap/db';
-import {EmailService, EmailServiceFactory} from './services/email-service';
+import {ConfigApi} from './api/config.api';
+import {JarApi} from './api/jar.api';
+import {json} from 'body-parser';
 import {LogService} from './services/log-service';
 
 const debug = debugInit('app:bootstrap');
 
 export class Bootstrap {
-  private emailService: EmailService;
   private log: LogService;
   private sapi: SakuraApi;
   private shuttingDown = false;
@@ -28,29 +23,17 @@ export class Bootstrap {
     this.sapi = new SakuraApi({
       baseUrl: '/api',
       models: [],
-      plugins: [
-        {
-          options: this.authNativeAuthorityOptions(),
-          plugin: addAuthenticationAuthority
-        },
-        {
-          options: this.authAudienceOptions(),
-          order: 1,
-          plugin: addAuthAudience
-        }
-      ],
+      plugins: [],
       providers: [
-        EmailService,
-        EmailServiceFactory,
         LogService
       ],
       routables: [
-        ConfigApi
+        ConfigApi,
+        JarApi
       ]
     });
 
     this.log = this.sapi.getProvider(LogService);
-    this.emailService = this.sapi.getProvider(EmailService);
 
     // SakuraApi setup
     this.sapi.addMiddleware(cors(this.sapi.config.cors), 0);
@@ -101,43 +84,6 @@ export class Bootstrap {
 
     this.log.info('And now his watch is ended');
     process.exit(0);
-  }
-
-  private authAudienceOptions(): IAuthAudienceOptions {
-    return {
-      excludedRoutes: authExcludedRoutes
-    };
-  }
-
-  private authNativeAuthorityOptions(): IAuthenticationAuthorityOptions {
-    // SakuraApi providers are not available until after SakuraApi is constructed and initialized, so wrapper functions
-    // are used that point to the EmailService that will be available once the bootstrap is completed.
-    return {
-      authDbConfig: dbs.authentication,
-      defaultDomain: 'default',
-      endpoints: {},
-      onChangePasswordEmailRequest: this.onChangePasswordEmailRequest.bind(this),
-      onForgotPasswordEmailRequest: this.onForgotPasswordEmailRequest.bind(this),
-      onResendEmailConfirmation: this.onResendEmailConfirmation.bind(this),
-      onUserCreated: this.onUserCreated.bind(this),
-      userDbConfig: dbs.user
-    };
-  }
-
-  private onChangePasswordEmailRequest() {
-    (this.emailService as any).onChangePasswordEmailRequest(...arguments);
-  }
-
-  private onForgotPasswordEmailRequest() {
-    (this.emailService as any).onForgotPasswordEmailRequest(...arguments);
-  }
-
-  private onResendEmailConfirmation() {
-    (this.emailService as any).onResendEmailConfirmation(...arguments);
-  }
-
-  private onUserCreated() {
-    (this.emailService as any).onUserCreated(...arguments);
   }
 
 }
