@@ -1,6 +1,7 @@
 import {IRoutableLocals, Routable, Route, SakuraApiRoutable} from '@sakuraapi/api';
 import {NextFunction, Request, Response} from 'express';
 import {OK, SERVER_ERROR} from '../lib/http-status';
+import {JarService} from '../services/jar-service';
 import {LogService} from '../services/log-service';
 
 @Routable({
@@ -23,11 +24,12 @@ export class JarApi extends SakuraApiRoutable {
 
   async defaultHandler(req: Request, res: Response): Promise<void> {
     const locals = res.locals as IRoutableLocals;
+    const jarService = new JarService(JarApi.sapi);
 
     try {
       locals
         .send(OK, {
-          coins: 'coin-jar'
+          coins: jarService.coins
         });
     } catch (err) {
       locals
