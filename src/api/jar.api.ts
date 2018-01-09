@@ -9,8 +9,20 @@ import {LogService} from '../services/log-service';
 })
 export class JarApi extends SakuraApiRoutable {
 
+  private jarService: JarService;
+
   constructor(private log: LogService) {
     super();
+    this.jarService = new JarService(JarApi.sapi);
+  }
+
+  @Route({
+    method: 'post',
+    path: 'add/:coins'
+  })
+  async postHandler(req: Request, res: Response, next: NextFunction) {
+    await this.incrementHandler(req, res);
+    next();
   }
 
   @Route({
@@ -24,12 +36,29 @@ export class JarApi extends SakuraApiRoutable {
 
   async defaultHandler(req: Request, res: Response): Promise<void> {
     const locals = res.locals as IRoutableLocals;
-    const jarService = new JarService(JarApi.sapi);
 
     try {
       locals
         .send(OK, {
-          coins: jarService.coins
+          coins: this.jarService.coins
+        });
+    } catch (err) {
+      locals
+        .send(SERVER_ERROR, {
+          error: 'SERVER_ERROR'
+        });
+      this.log.error(err);
+    }
+  }
+
+  async incrementHandler(req: Request, res: Response): Promise<void> {
+    const locals = res.locals as IRoutableLocals;
+    const incCoins: number = +req.params.coins;
+
+    try {
+      locals
+        .send(OK, {
+          coins: this.jarService.addCoins(incCoins)
         });
     } catch (err) {
       locals

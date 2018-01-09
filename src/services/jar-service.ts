@@ -13,5 +13,7 @@ export class JarService {
 
   addCoins(increment?: number) {
     this.coins += increment || 1;
+    // this.log.info('Adding ' + increment + '\n total now ' + this.coins);
+    return this.coins;
   }
 }
