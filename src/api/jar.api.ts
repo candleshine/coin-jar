@@ -1,11 +1,13 @@
 import {IRoutableLocals, Routable, Route, SakuraApiRoutable} from '@sakuraapi/api';
 import {NextFunction, Request, Response} from 'express';
 import {OK, SERVER_ERROR} from '../lib/http-status';
+import {Jar} from '../models/jar-model';
 import {JarService} from '../services/jar-service';
 import {LogService} from '../services/log-service';
 
 @Routable({
-  baseUrl: '/jar'
+  baseUrl: '/jar',
+  model: Jar
 })
 export class JarApi extends SakuraApiRoutable {
 
