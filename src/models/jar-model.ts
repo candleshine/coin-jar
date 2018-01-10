@@ -1,5 +1,5 @@
 import {Db, Json, Model, SakuraApiModel} from '@sakuraapi/api';
-import {dbs} from '../config/bootstrap/db';
+import {dbs} from '../config/db';
 
 @Model({
   dbConfig: dbs.jar

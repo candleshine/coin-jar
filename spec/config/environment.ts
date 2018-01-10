@@ -1,4 +1,4 @@
-import {dbs} from '../../src/config/bootstrap/db';
+import {dbs} from '../../src/config/db';
 
 // tslint:disable:max-line-length
 module.exports = {
