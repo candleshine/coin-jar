@@ -2,7 +2,7 @@
  * This is the base configuration that's used when testing locally. It also cascades to other environments
  * unless the properties are explicitly overridden in those later configurations.
  */
-import {dbs} from './db';
+import {dbs} from './bootstrap/db';
 
 /**
  * MongoDB Environmental Variable Configuration and Defaults

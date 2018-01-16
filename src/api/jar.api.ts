@@ -1,21 +1,36 @@
-import {IRoutableLocals, Routable, Route, SakuraApiRoutable} from '@sakuraapi/api';
-import {NextFunction, Request, Response} from 'express';
-import {OK, SERVER_ERROR} from '../lib/http-status';
+import {
+  IRoutableLocals,
+  Routable,
+  Route,
+  SakuraApi,
+  SapiRoutableMixin
+} from '@sakuraapi/api';
+import {
+  NextFunction,
+  Request,
+  Response
+} from 'express';
+import {
+  OK,
+  SERVER_ERROR
+} from '../lib/http-status';
 import {Jar} from '../models/jar-model';
 import {JarService} from '../services/jar-service';
 import {LogService} from '../services/log-service';
+
+export {SakuraApi};
 
 @Routable({
   baseUrl: '/jar',
   model: Jar
 })
-export class JarApi extends SakuraApiRoutable {
+export class JarApi extends SapiRoutableMixin() {
 
   private jarService: JarService;
 
   constructor(private log: LogService) {
     super();
-    this.jarService = new JarService(JarApi.sapi);
+    this.jarService = new JarService();
   }
 
   @Route({
@@ -55,7 +70,7 @@ export class JarApi extends SakuraApiRoutable {
 
   async incrementHandler(req: Request, res: Response): Promise<void> {
     const locals = res.locals as IRoutableLocals;
-    const incCoins: number = +req.params.coins;
+    const incCoins: number = + req.params.coins;
 
     try {
       locals
