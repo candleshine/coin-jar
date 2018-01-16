@@ -3,11 +3,6 @@ import {dbs} from '../../src/config/bootstrap/db';
 // tslint:disable:max-line-length
 module.exports = {
   dbConnections: [
-    {
-      mongoClientOptions: {},
-      name: dbs.user.db,
-      url: `mongodb://${process.env.TEST_MONGO_DB_ADDRESS}:${process.env.TEST_MONGO_DB_PORT}/test`
-    }
   ],
   server: {
     address: '127.0.0.1',
