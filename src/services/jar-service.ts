@@ -1,14 +1,21 @@
-import {SakuraApi} from '@sakuraapi/api';
+import {
+  Injectable,
+  SakuraApi,
+  SapiInjectableMixin
+} from '@sakuraapi/api';
 import {LogService} from './log-service';
 
-export class JarService {
+export {SakuraApi};
+
+@Injectable()
+export class JarService extends SapiInjectableMixin() {
 
   coins = 0;
   private config: any;
   private log: LogService;
 
-  constructor(private sapi: SakuraApi, options?: any) {
-    this.config = this.sapi.config.jar;
+  constructor() {
+    super();
   }
 
   addCoins(increment?: number) {

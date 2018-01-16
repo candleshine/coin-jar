@@ -1,11 +1,11 @@
 import {SakuraApi} from '@sakuraapi/api';
+import {json} from 'body-parser';
 import * as cors from 'cors';
 import * as debugInit from 'debug';
 import * as helmet from 'helmet';
-import {BootstrapIndexes} from './config/bootstrap/bootstrap-indexes';
 import {ConfigApi} from './api/config.api';
 import {JarApi} from './api/jar.api';
-import {json} from 'body-parser';
+import {BootstrapIndexes} from './config/bootstrap/bootstrap-indexes';
 import {LogService} from './services/log-service';
 
 const debug = debugInit('app:bootstrap');

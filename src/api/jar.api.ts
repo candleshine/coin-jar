@@ -1,19 +1,35 @@
-import {IRoutableLocals, Routable, Route, SakuraApiRoutable} from '@sakuraapi/api';
-import {NextFunction, Request, Response} from 'express';
-import {OK, SERVER_ERROR} from '../lib/http-status';
+///<reference path="../services/jar-service.ts"/>
+import {
+  IRoutableLocals,
+  Routable,
+  Route,
+  SakuraApi,
+  SapiRoutableMixin
+} from '@sakuraapi/api';
+import {
+  NextFunction,
+  Request,
+  Response
+} from 'express';
+import {
+  OK,
+  SERVER_ERROR
+} from '../lib/http-status';
 import {JarService} from '../services/jar-service';
 import {LogService} from '../services/log-service';
 
+export {SakuraApi};
+
 @Routable({
-  baseUrl: '/jar'
+  baseUrl: '/jar',
 })
-export class JarApi extends SakuraApiRoutable {
+export class JarApi extends SapiRoutableMixin() {
 
   private jarService: JarService;
 
   constructor(private log: LogService) {
     super();
-    this.jarService = new JarService(JarApi.sapi);
+    this.jarService = new JarService();
   }
 
   @Route({
