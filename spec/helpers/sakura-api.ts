@@ -1,4 +1,4 @@
-import {SakuraApi} from '@sakuraapi/api';
+import {SakuraApi} from '@sakuraapi/core';
 import {json} from 'body-parser';
 import * as helmet from 'helmet';
 import {sign} from 'jsonwebtoken';

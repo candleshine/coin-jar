@@ -1,4 +1,4 @@
-import {SakuraApi} from '@sakuraapi/api';
+import {SakuraApi} from '@sakuraapi/core';
 import * as cors from 'cors';
 import * as debugInit from 'debug';
 import * as helmet from 'helmet';

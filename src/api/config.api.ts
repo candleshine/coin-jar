@@ -4,16 +4,16 @@ import {
   Route,
   SakuraApi,
   SapiRoutableMixin
-} from '@sakuraapi/api';
+}                   from '@sakuraapi/core';
 import {
   NextFunction,
   Request,
   Response
-} from 'express';
+}                   from 'express';
 import {
   OK,
   SERVER_ERROR
-} from '../lib/http-status';
+}                   from '../lib/http-status';
 import {LogService} from '../services/log-service';
 
 export {SakuraApi};
