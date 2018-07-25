@@ -1,6 +1,6 @@
-import {Injectable, SakuraApi} from '@sakuraapi/api';
 import {addAuthAudience} from '@sakuraapi/auth-audience';
 import {addAuthenticationAuthority, IAuthenticationAuthorityOptions} from '@sakuraapi/auth-native-authority';
+import {Injectable, SakuraApi} from '@sakuraapi/core';
 import {testSapi} from '../../spec/helpers/sakura-api';
 import {EmailService, EmailServiceFactory} from './email-service';
 import {LogService} from './log-service';

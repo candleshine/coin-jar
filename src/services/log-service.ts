@@ -1,4 +1,4 @@
-import {Injectable, SakuraApiInjectable} from '@sakuraapi/api';
+import {Injectable, SapiInjectableMixin} from '@sakuraapi/core';
 import {hostname} from 'os';
 import * as request from 'request-promise-native';
 import {Logger, LoggerInstance, transports} from 'winston';
@@ -35,7 +35,7 @@ export type levels = 'error' | 'warn' | 'info' | 'verbose' | 'debug' | 'silly';
  * are whatever the properties are in the documentation for that transport.
  */
 @Injectable()
-export class LogService extends SakuraApiInjectable {
+export class LogService extends SapiInjectableMixin() {
 
   private static city = 'unacquired';
   private static country = 'unacquired';

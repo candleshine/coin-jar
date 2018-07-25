@@ -1,16 +1,16 @@
-import {SakuraApi} from '@sakuraapi/api';
+import {SakuraApi} from '@sakuraapi/core';
 import {json} from 'body-parser';
 import * as helmet from 'helmet';
 import {sign} from 'jsonwebtoken';
 
 export const baseUri = '/testApi';
 export const noNetwork = !!process.env.NO_NETWORK || false;
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.log('Caught unhandledRejection');
   console.log(err);
 });
 
-process.on('uncaughtException', err => {
+process.on('uncaughtException', (err) => {
   console.log('Caught uncaughtException');
   console.log(err);
 });

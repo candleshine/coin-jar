@@ -18,4 +18,4 @@ You can add a coin with __/jar/add/1__
 
 Scaffolding done with `@sakuraapi/cli`.
 
-For more information on SakuraApi, visit https://github.com/sakuraapi/api
+For more information on SakuraApi, visit https://sakuraapi.com

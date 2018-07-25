@@ -1,4 +1,4 @@
-import {IRoutableLocals, Routable, Route, SakuraApiRoutable} from '@sakuraapi/api';
+import {IRoutableLocals, Routable, Route, SapiRoutableMixin} from '@sakuraapi/core';
 import {NextFunction, Request, Response} from 'express';
 import {OK, SERVER_ERROR} from '../lib/http-status';
 import {LogService} from '../services/log-service';
@@ -6,7 +6,7 @@ import {LogService} from '../services/log-service';
 @Routable({
   baseUrl: '/'
 })
-export class ConfigApi extends SakuraApiRoutable {
+export class ConfigApi extends SapiRoutableMixin() {
 
   constructor(private log: LogService) {
     super();

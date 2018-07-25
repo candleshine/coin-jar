@@ -1,16 +1,16 @@
-import {SakuraApi} from '@sakuraapi/api';
+import {SakuraApi} from '@sakuraapi/core';
 import 'colors';
 import * as fs from 'fs';
 import * as util from 'util';
 import {Bootstrap} from './sakura-api';
 import {LogService} from './services/log-service';
 
-process.on('unhandledRejection', err => {
+process.on('unhandledRejection', (err) => {
   console.log('Caught unhandledRejection');
   console.log(err);
 });
 
-process.on('uncaughtException', err => {
+process.on('uncaughtException', (err) => {
   console.log('Caught uncaughtException');
   console.log(err);
 });
