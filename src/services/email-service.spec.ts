@@ -1,8 +1,18 @@
 import {addAuthAudience} from '@sakuraapi/auth-audience';
-import {addAuthenticationAuthority, IAuthenticationAuthorityOptions} from '@sakuraapi/auth-native-authority';
-import {Injectable, SakuraApi} from '@sakuraapi/core';
-import {testSapi} from '../../spec/helpers/sakura-api';
-import {EmailService, EmailServiceFactory} from './email-service';
+import {
+  addAuthenticationAuthority,
+  IAuthenticationAuthorityOptions
+}                        from '@sakuraapi/auth-native-authority';
+
+import {
+  Injectable,
+  SakuraApi
+}                   from '@sakuraapi/core';
+import {testSapi}   from '../../spec/helpers/sakura-api';
+import {
+  EmailService,
+  EmailServiceFactory
+}                   from './email-service';
 import {LogService} from './log-service';
 
 @Injectable()
@@ -39,7 +49,7 @@ describe('EmailService', () => {
     ln: 'washington'
   };
 
-  beforeEach(async () => {
+  beforeEach(() => {
     sapi = testSapi({
       providers: [
         EmailService,
@@ -49,6 +59,10 @@ describe('EmailService', () => {
     });
 
     emailService = sapi.getProvider(EmailService);
+  });
+
+  afterEach(() => {
+    sapi.deregisterDependencies();
   });
 
   it('onChangePasswordEmailRequest', async (done) => {
